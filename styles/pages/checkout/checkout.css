@@ -76,6 +76,7 @@
   margin-bottom: 22px;
 }
 
+
 .cart-item-details-grid {
   display: grid;
   /* 100px 1fr 1fr; means the 2nd and 3rd column will
@@ -84,6 +85,23 @@
   grid-template-columns: 100px 1fr 1fr;
   column-gap: 25px;
 }
+
+.input-quantity{
+  width: 30px;
+  display: none;
+}
+
+.is-editing-quantity .input-quantity,
+.is-editing-quantity .save-quantity-link{
+  display: initial;
+}
+
+.is-editing-quantity .update-quantity-link,
+.is-editing-quantity .quantity-label{
+  display: none;
+}
+
+
 
 @media (max-width: 1000px) {
   .cart-item-details-grid {
@@ -139,6 +157,12 @@
   margin-bottom: 10px;
 }
 
+.error-message{
+  color: darkred;
+  font-family: Arial;
+  font-size: 20px;
+}
+
 .delivery-option {
   display: grid;
   grid-template-columns: 24px 1fr;
@@ -181,6 +205,9 @@
 
 .payment-summary-money {
   text-align: right;
+}
+.save-quantity-link{
+  display: none;
 }
 
 .subtotal-row .payment-summary-money {
