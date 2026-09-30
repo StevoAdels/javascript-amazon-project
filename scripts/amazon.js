@@ -3,6 +3,7 @@ import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
 
+
 let productsHTML = '';
 updateCartQuantity();
 
@@ -63,7 +64,7 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
 
 
-  function updateCartQuantity(){
+  export function updateCartQuantity(){
     let cartQuantity = 0;
 
     cart.forEach((cartItem) => {
@@ -75,8 +76,10 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
    else {
      document.querySelector('.js-cart-quantity').innerHTML = `${cartQuantity}`
    }
-    
+
   }
+
+  
 
     function addedToCart(productId){
         let timeoutID;

@@ -1,5 +1,6 @@
 export let cart = JSON.parse(localStorage.getItem('cart'));
 
+
 if (!cart){
     cart = [{
         productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
@@ -62,32 +63,39 @@ export function addToCart (productId, quantity){
  }
 
 
+  
   export function updateSaveQuantity(productId, valueInput){
-  let matchingItem;
-  document.querySelector('.js-warn').innerHTML = '';
-  const errorMessage = document.querySelector('.js-warn')
-    cart.forEach((cartItem) => {
-      if (productId === cartItem.productId){
-      matchingItem = cartItem;
-      }
-    })
-     if (matchingItem){
-      if (valueInput > 0 && valueInput < 1000){
-      matchingItem.quantity = valueInput;
-      document.querySelector('.js-warn').innerHTML = '';
-       document.querySelector('.js-checkout').innerHTML = `${valueInput} items`
-       document.querySelector('.js-quantity-label').innerHTML = `${valueInput}`
-     }
-      else {
-      
-     errorMessage.classList.add('error-message');
-      errorMessage.innerHTML = 'Please input a number between zero and one thousand'
-      return;
-     }
-    }
-      saveToLocalStorage();
-    };
 
+      let cartQuantity = 0;
+    let matchingItem;
+    document.querySelector('.js-warn').innerHTML = '';
+    const errorMessage = document.querySelector('.js-warn')
+      cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+        if (productId === cartItem.productId){
+        matchingItem = cartItem;
+        }
+
+      })
+       if (matchingItem){
+        if (valueInput > 0 && valueInput < 1000){
+        matchingItem.quantity = valueInput;
+        document.querySelector('.js-warn').innerHTML = '';
+         
+         document.querySelector('.js-quantity-label').innerHTML = `${valueInput}`
+         
+       }
+        else {
+        
+       errorMessage.classList.add('error-message');
+        errorMessage.innerHTML = 'Please input a number between zero and one thousand'
+        return;
+       }
+      }
+  
+       
+        saveToLocalStorage();
+      };
 
   export  function updateDeliveryOption (productId, deliveryOptionId){
       let matchingItem;
