@@ -120,6 +120,7 @@ document.querySelectorAll('.js-delete-quantity').forEach((deleteButton) => {
         const container = document.querySelector(`.js-cart-item-container-${productId}`);
         container.remove();
         updateCheckoutItem();
+        renderPaymentSummary();
     })
 });
 
@@ -141,6 +142,7 @@ document.querySelectorAll('.js-save-quantity-link').forEach((saveButton) => {
     container.classList.remove('is-editing-quantity');
     updateSaveQuantity(productId, valueInput);
     updateCheckoutItem();
+    renderPaymentSummary();
     inputValue.value = '';
    
   })
@@ -158,6 +160,7 @@ document.querySelectorAll('.js-save-quantity-link').forEach((saveButton) => {
         updateCheckoutItem();
          const container = document.querySelector(`.js-cart-item-container-${productId}`);
           container.classList.remove('is-editing-quantity');
+          renderPaymentSummary();
       }
       inputValue.value = '';
     })
