@@ -53,7 +53,7 @@ export function addToCart (productId, quantity){
     displayQuantity += cartItem.quantity
   });
   document.querySelector('.js-checkout').innerHTML = `${displayQuantity} items`
-  updateSaveQuantity();
+  
  }
 
  export function removeFromCart (productId){

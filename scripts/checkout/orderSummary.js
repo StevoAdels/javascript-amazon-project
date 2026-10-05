@@ -25,7 +25,7 @@ cart.forEach((cartItem) => {
 const dateString = calculateDeliveryDate(deliveryOption)
 
 cartSummaryHTML += `
-<div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
+<div class="cart-item-container js-cart-item-container js-cart-item-container-${matchingProduct.id}">
             <div class="delivery-date">
               ${dateString}
             </div>
@@ -41,7 +41,7 @@ cartSummaryHTML += `
                 <div class="product-price">
                   $${formatCurrency(matchingProduct.priceCents)}
                 </div>
-                <div class="product-quantity">
+                <div class="js-product-quantity-${matchingProduct.id} product-quantity">
                   <span>
                     Quantity: <span class="quantity-label js-quantity-label">${cartItem.quantity}</span>
                   </span>
@@ -50,7 +50,7 @@ cartSummaryHTML += `
                   </span>
                   <input class ="input-quantity js-quantity-input" id = ${matchingProduct.id} data-product-id = ${matchingProduct.id}>
                   <span class ="link-primary save-quantity-link js-save-quantity-link" data-product-id = "${matchingProduct.id}">Save</span>
-                  <span class="delete-quantity-link link-primary js-delete-quantity" data-product-id = "${matchingProduct.id}">
+                  <span class=" js-delete-link-${matchingProduct.id} delete-quantity-link link-primary js-delete-quantity" data-product-id = "${matchingProduct.id}">
                     Delete
                   </span>
                   <p class = "js-warn"></p>
@@ -69,7 +69,7 @@ cartSummaryHTML += `
 })
 
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
-updateCheckoutItem();
+
 
 
 function deliveryOptionsHTML (matchingProduct, cartItem){
