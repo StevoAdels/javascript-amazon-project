@@ -110,8 +110,11 @@ export function addToCart (productId, quantity){
                 matchingItem = cartItem;
             }
         });
-
+        if (matchingItem && deliveryOptionId >= 1 && deliveryOptionId <= 3){
         matchingItem.deliveryOptionId = deliveryOptionId;
 
         saveToLocalStorage();
+        } else {
+          return;
+        }
     }
