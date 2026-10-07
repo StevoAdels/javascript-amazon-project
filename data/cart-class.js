@@ -143,9 +143,7 @@ cart.addToCart('id2', 1);
 
 
 
-console.log(cart);
-console.log(businessCart);
-console.log(businessCart instanceof Cart)
+
 
 
 
