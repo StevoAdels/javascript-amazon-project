@@ -1,11 +1,11 @@
-import { cart, addToCart,  } from '../data/cart.js';
+import { cart } from '../data/cart-class.js';
 import { products } from '../data/products.js';
 
 
 
-
+updateCartQuantity()
 let productsHTML = '';
-updateCartQuantity();
+
 
 products.forEach((product) => {
   productsHTML += `<div class="product-container">
@@ -67,7 +67,7 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
   export function updateCartQuantity(){
     let cartQuantity = 0;
 
-    cart.forEach((cartItem) => {
+    cart.cartItems.forEach((cartItem) => {
       cartQuantity += cartItem.quantity;
     });
     if (cartQuantity === 0){
@@ -76,7 +76,7 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
    else {
      document.querySelector('.js-cart-quantity').innerHTML = `${cartQuantity}`
    }
-
+    
   }
 
   
@@ -102,7 +102,7 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
    const quantity = Number(itemSelector.value)
 
     
-    addToCart(productId, quantity);
+    cart.addToCart(productId, quantity);
     updateCartQuantity();
     addedToCart(productId);
     

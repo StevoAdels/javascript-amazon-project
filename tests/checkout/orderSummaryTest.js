@@ -1,5 +1,5 @@
 import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
-import { loadFromStorage, cart} from "../../data/cart.js";
+import { cart} from "../../data/cart-class.js";
 
 
 
@@ -9,7 +9,7 @@ describe('Test suite: renderOrderSummary', () => {
     const deliveryId = '3';
     
     beforeEach(() => {
-               spyOn(localStorage, 'setItem');
+               
            document.querySelector('.js-test-container').innerHTML = `
             <div class= "js-order-summary"></div>
             <div class = "js-payment-summary"></div>
@@ -18,8 +18,7 @@ describe('Test suite: renderOrderSummary', () => {
             
         `
         
-            spyOn(localStorage, 'getItem').and.callFake(() => {
-            return JSON.stringify([{
+           cart.cartItems = [{
         productId: productId1,
         quantity: 2,
         deliveryOptionId: '1'
@@ -27,11 +26,9 @@ describe('Test suite: renderOrderSummary', () => {
         productId: productId2,
         quantity: 1,
         deliveryOptionId: '2'
-    }]);
-        });
-        loadFromStorage();
-
-        renderOrderSummary();
+    }]
+    
+    renderOrderSummary()
     });
 
     afterEach(() => {
@@ -62,8 +59,8 @@ describe('Test suite: renderOrderSummary', () => {
         expect(
             document.querySelector(`.js-cart-item-container-${productId2}`)
         ).not.toEqual(null)
-        expect(cart.length).toEqual(1);
-        expect(cart[0].productId).toEqual(productId2)
+        expect(cart.cartItems.length).toEqual(1);
+        expect(cart.cartItems[0].productId).toEqual(productId2)
 
     });
 
@@ -71,7 +68,7 @@ describe('Test suite: renderOrderSummary', () => {
         document.querySelector(`.js-delivery-option-${productId1}-${deliveryId}`).click()
         const checkBox = document.querySelector(`.js-delivery-option-input-${productId1}-${deliveryId}`)
         expect(checkBox.checked).toBe(true);
-        expect(cart.length).toEqual(2);
+        expect(cart.cartItems.length).toEqual(2);
         expect(
             document.querySelector('.js-total-payment').innerHTML
         ).toEqual('$63.50')

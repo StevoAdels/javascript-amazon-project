@@ -1,4 +1,4 @@
-import {cart, removeFromCart, updateCheckoutItem, updateDeliveryOption, updateSaveQuantity} from '../../data/cart.js'
+import { cart } from '../../data/cart-class.js';
 import { products, getProduct} from '../../data/products.js'
 import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
@@ -10,10 +10,10 @@ import { renderPaymentSummary } from './paymentSummary.js';
 
 
 export function renderOrderSummary(){
-
+cart.updateCheckoutItem();
 let cartSummaryHTML = ''; 
 
-cart.forEach((cartItem) => {
+cart.cartItems.forEach((cartItem) => {
    const productId = cartItem.productId; 
 
    const matchingProduct =  getProduct(productId);
@@ -110,9 +110,9 @@ function deliveryOptionsHTML (matchingProduct, cartItem){
 document.querySelectorAll('.js-delete-quantity').forEach((deleteButton) => {
     deleteButton.addEventListener('click', () => {
         const {productId} = deleteButton.dataset
-        removeFromCart(productId);
+        cart.removeFromCart(productId);
         renderOrderSummary();
-        updateCheckoutItem();
+        cart.updateCheckoutItem();
         renderPaymentSummary();
     })
 });
@@ -133,8 +133,8 @@ document.querySelectorAll('.js-save-quantity-link').forEach((saveButton) => {
     const {productId} = saveButton.dataset
     const container = document.querySelector(`.js-cart-item-container-${productId}`);
     container.classList.remove('is-editing-quantity');
-    updateSaveQuantity(productId, valueInput);
-    updateCheckoutItem();
+    cart.updateSaveQuantity(productId, valueInput);
+    cart.updateCheckoutItem();
     renderPaymentSummary();
     inputValue.value = '';
    
@@ -149,8 +149,8 @@ document.querySelectorAll('.js-save-quantity-link').forEach((saveButton) => {
       const valueInput = Number(inputValue.value);
      
       if (event.key === 'Enter'){
-        updateSaveQuantity(productId, valueInput)
-        updateCheckoutItem();
+        cart.updateSaveQuantity(productId, valueInput)
+        cart.updateCheckoutItem();
          const container = document.querySelector(`.js-cart-item-container-${productId}`);
           container.classList.remove('is-editing-quantity');
           renderPaymentSummary();
@@ -163,7 +163,7 @@ document.querySelectorAll('.js-save-quantity-link').forEach((saveButton) => {
 document.querySelectorAll('.js-delivery-option').forEach((element) => {
 element.addEventListener('click', () => {
   const {productId, deliveryOptionId} = element.dataset
-    updateDeliveryOption(productId, deliveryOptionId)
+    cart.updateDeliveryOption(productId, deliveryOptionId)
     renderOrderSummary();
     renderPaymentSummary();
   })
