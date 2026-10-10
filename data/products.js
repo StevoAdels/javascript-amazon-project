@@ -103,17 +103,18 @@ export function loadProducts (fun){
   } else if (productDetails.type === 'appliances'){
     return new Appliance (productDetails)
   }
+  
   return new Product (productDetails);
   
 });
 
-fun()
+fun();
   });
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 };
 
-loadProducts();
+
 
 console.log (products)
 
