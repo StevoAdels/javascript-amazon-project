@@ -1,18 +1,12 @@
 import {renderOrderSummary} from './checkout/orderSummary.js'
 import {renderPaymentSummary} from './checkout/paymentSummary.js'
-import { loadProducts } from '../data/products.js';
+import {  loadProductsFetch } from '../data/products.js';
 import { loadCart } from '../data/cart-class.js';
 // import '../data/backend-practice.js'
 // import '../data/car.js'
 
 Promise.all([
-     new Promise ((resolve) => {
-    console.log('start loading')
-    loadProducts(() => {
-        console.log('finished loading')
-        resolve('value 1')
-    });
-}),
+loadProductsFetch(),
     new Promise ((resolve) => {
         loadCart(() => {
             resolve('value 2')
