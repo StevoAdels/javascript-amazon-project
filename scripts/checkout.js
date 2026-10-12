@@ -5,6 +5,21 @@ import { loadCart } from '../data/cart-class.js';
 // import '../data/backend-practice.js'
 // import '../data/car.js'
 
+async function loadPage() {
+await loadProductsFetch();
+await  new Promise ((resolve) => {
+        loadCart(() => {
+            resolve('value 2')
+        })
+})
+renderOrderSummary()
+renderPaymentSummary()
+}
+
+loadPage();
+
+
+/*
 Promise.all([
 loadProductsFetch(),
     new Promise ((resolve) => {
@@ -17,6 +32,7 @@ loadProductsFetch(),
     renderOrderSummary();
     renderPaymentSummary();
 });
+    */
 /*
  new Promise ((resolve) => {
     console.log('start loading')
