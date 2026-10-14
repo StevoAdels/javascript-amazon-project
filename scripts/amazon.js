@@ -1,12 +1,13 @@
 import { cart } from '../data/cart-class.js';
-import { loadProducts, products } from '../data/products.js';
+import { loadProductsFetch, products } from '../data/products.js';
 
 
 
+loadProductsFetch().then(() => {
+  renderProductsGrid()
+})
+updateCartQuantity();
 
-loadProducts(renderProductsGrid);
-updateCartQuantity()
-console.log(products)
 function renderProductsGrid (){
 let productsHTML = '';
 
