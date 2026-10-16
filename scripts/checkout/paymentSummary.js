@@ -78,7 +78,9 @@ const productId = cartItem.productId
       } catch (error){
         console.log('Unexpected error: Please try again later')
       }
+      
       window.location.href = 'orders.html'
+      
          });
 
 }

@@ -68,3 +68,22 @@ export function calculateDeliveryDate(deliveryOption){
 
             return dateString;
 }
+
+export function calculateDeliveryTime (productItems){
+    let deliveryDate = new Date(productItems.estimatedDeliveryTime)
+    let weekDay = deliveryDate.getDay()
+    console.log(weekDay)
+    while (weekDay === 0 || weekDay === 6){
+        deliveryDate.setDate(deliveryDate.getDate() + 1);
+        weekDay = deliveryDate.getDay()
+        
+    }
+    const dateString = deliveryDate.toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric"
+    })
+    
+    return dateString
+}
+
+

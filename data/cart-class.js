@@ -78,6 +78,26 @@ if (!this.cartItems){
  
  };
 
+updateCartQuantity() {
+  let cartQuantity = 0;
+
+  this.cartItems.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  });
+
+  const cartQuantityElement = document.querySelector('.js-cart-quantity');
+
+  if (!cartQuantityElement) {
+    return;
+  }
+
+  if (cartQuantity === 0) {
+    cartQuantityElement.innerHTML = '';
+  } else {
+    cartQuantityElement.innerHTML = `${cartQuantity}`;
+  }
+}
+
  updateSaveQuantity(productId, valueInput){
 
       

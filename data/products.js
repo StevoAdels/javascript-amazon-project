@@ -76,7 +76,7 @@ instuctionsLink;
 const date = new Date()
 console.log(date);
 
-console.log(this);
+
 /* const object2 = {
   a: 2,
   b: this.a
@@ -97,13 +97,14 @@ export function loadProductsFetch(){
   const promise = fetch('https://supersimplebackend.dev/products').then((response) => {
     return (response.json())
   }).then((productsData) => {
-    console.log(productsData)
+    
     products = productsData.map((productDetails) => {
   if (productDetails.type === 'clothing'){
     return new Clothing (productDetails);
   } else if (productDetails.type === 'appliances'){
     return new Appliance (productDetails)
   }
+  console.log('load')
   
   return new Product (productDetails);
   
@@ -111,12 +112,15 @@ export function loadProductsFetch(){
   }).catch(() => {
     console.log('unexpected error: Please try again later')
   }); 
+ 
   return promise;
 }
 
 loadProductsFetch().then(() => {
    console.log('next step')
 })
+
+
 /*
  export function loadProducts (fun){
   const xhr = new XMLHttpRequest;
