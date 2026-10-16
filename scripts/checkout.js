@@ -25,8 +25,7 @@ renderOrderSummary()
 renderPaymentSummary()
 }
 
-loadPage();
-
+loadPage()
 
 /*
 Promise.all([

@@ -10,6 +10,8 @@ import { renderPaymentSummary } from './paymentSummary.js';
 
 
 export function renderOrderSummary(){
+  const orderSummary = document.querySelector('.js-order-summary');
+displayEmptyCart()
 cart.updateCheckoutItem();
 let cartSummaryHTML = ''; 
 
@@ -68,7 +70,36 @@ cartSummaryHTML += `
 `
 })
 
+
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
+
+
+
+function displayEmptyCart (){
+  
+    const displayEmptyCart = `
+    <div class="empty-cart-container js-empty-cart-container">
+            <p>Your cart is empty.</p>
+            <a href="amazon.html" class="button-primary">
+              View products
+            </a>
+          </div>
+       
+    `
+
+  
+
+  if (cart.cartItems.length === 0) {
+    orderSummary.innerHTML = displayEmptyCart;
+    
+    renderPaymentSummary()
+    cart.updateCheckoutItem();
+    renderOrderSummary()
+    
+  }
+
+
+}
 
 
 
@@ -111,9 +142,11 @@ document.querySelectorAll('.js-delete-quantity').forEach((deleteButton) => {
     deleteButton.addEventListener('click', () => {
         const {productId} = deleteButton.dataset
         cart.removeFromCart(productId);
-        renderOrderSummary();
+        
+        displayEmptyCart()
         cart.updateCheckoutItem();
         renderPaymentSummary();
+        renderOrderSummary();
     })
 });
 
