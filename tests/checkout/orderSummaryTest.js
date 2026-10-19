@@ -82,4 +82,12 @@ describe('Test suite: renderOrderSummary', () => {
             document.querySelector('.js-shipping-price').innerHTML
         ).toEqual('$14.98')
     });
+
+    it('disables place order when the cart is empty', () => {
+        cart.cartItems = [];
+
+        renderOrderSummary();
+
+        expect(document.querySelector('.js-place-order').disabled).toBe(true);
+    });
 });

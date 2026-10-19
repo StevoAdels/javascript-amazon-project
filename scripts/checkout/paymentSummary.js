@@ -22,6 +22,7 @@ const productId = cartItem.productId
     const totalBeforeTaxCents = productsPriceCents + shippingPriceCents;
     const taxCents = totalBeforeTaxCents * 0.1;
     const totalCents = totalBeforeTaxCents + taxCents;
+    const isCartEmpty = cart.cartItems.length === 0;
 
     const paymentSummaryHTML = `<div class="payment-summary-title">
             Order Summary
@@ -52,15 +53,21 @@ const productId = cartItem.productId
             <div class="payment-summary-money js-total-payment">$${formatCurrency(totalCents)}</div>
           </div>
 
-          <button class="place-order-button button-primary js-place-order">
+          <button class="place-order-button button-primary js-place-order" ${isCartEmpty ? 'disabled' : ''}>
             Place your order
           </button>
           `;
 
 
     document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHTML;
+
+    const placeOrderButton = document.querySelector('.js-place-order');
+
+    if (!placeOrderButton || isCartEmpty) {
+      return;
+    }
     
-    document.querySelector('.js-place-order').addEventListener('click', async () => {
+    placeOrderButton.addEventListener('click', async () => {
       try {
       const response = await fetch('https://supersimplebackend.dev/orders', {
         method: 'POST',
