@@ -78,7 +78,7 @@ const productId = cartItem.productId
       } catch (error){
         console.log('Unexpected error: Please try again later')
       }
-      
+      localStorage.removeItem('cart-oop')
       window.location.href = 'orders.html'
       
          });

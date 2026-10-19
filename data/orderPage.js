@@ -3,6 +3,7 @@ import { calculateDeliveryTime } from "./deliveryOptions.js";
 import { products, loadProductsFetch } from "./products.js";
 import { formatCurrency } from "../scripts/utils/money.js";
 import { orders } from "./orderButton.js";
+import { renderOrderSummary } from "../scripts/checkout/orderSummary.js";
 
 
 
@@ -106,7 +107,8 @@ let matchingItem = '';
               <div class="product-quantity">
                 Quantity: ${productItems.quantity}
               </div>
-              <button class="buy-again-button button-primary">
+              <button class="buy-again-button js-buy-again-button
+               button-primary" data-product-id = "${matchingItem.id}">
                 <img class="buy-again-icon" src="images/icons/buy-again.png">
                 <span class="buy-again-message">Buy it again</span>
               </button>
@@ -127,7 +129,11 @@ let matchingItem = '';
 
     return html;
 }
-
-
+document.querySelectorAll('.js-buy-again-button').forEach((button) => {
+    button.addEventListener('click', () => {
+        const {productId} = button.dataset;
+        cart.addToCart(productId, 1);
+        cart.updateCartQuantity()
+    });
+})
 }
-

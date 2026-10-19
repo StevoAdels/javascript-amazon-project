@@ -85,7 +85,7 @@ updateCartQuantity() {
   }
 
   if (cartQuantity === 0) {
-    cartQuantityElement.innerHTML = '';
+    cartQuantityElement.innerHTML = 0;
   } else {
     cartQuantityElement.innerHTML = `${cartQuantity}`;
   }
