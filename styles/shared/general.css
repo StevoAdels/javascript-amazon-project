@@ -34,10 +34,11 @@ input, select, button {
 }
 
 .button-primary:disabled {
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(230, 240, 30);
   border-color: rgb(200, 200, 200);
   box-shadow: none;
-  cursor: not-allowed;
+  cursor: no-drop;
+  pointer-events: none;
   opacity: 0.7;
 }
 

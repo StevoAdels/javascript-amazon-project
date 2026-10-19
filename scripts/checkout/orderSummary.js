@@ -79,7 +79,10 @@ function displayEmptyCart (){
   
     const displayEmptyCart = `
     <div class="empty-cart-container js-empty-cart-container">
+          <div class="empty-cart-message">
             <p>Your cart is empty.</p>
+            </div>
+            
             <a href="amazon.html" class="button-primary">
               View products
             </a>
