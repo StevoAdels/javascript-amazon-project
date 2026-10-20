@@ -74,10 +74,11 @@ function renderOrder (orderItems){
 let matchingItem = '';
    let date = '';
     const product = orderItems.products
- 
-
+    let deliveryTime;
+    const orderTime = orderItems.orderTime
 
     product.forEach((productItems) => {
+      deliveryTime = product.estimatedDeliveryTime
        products.forEach((productsItems) => {
     if (productsItems.id ===productItems.productId ){
         matchingItem = productsItems
@@ -126,8 +127,9 @@ let matchingItem = '';
             
  }) 
 
-
+ console.log(Number(deliveryTime) - Number(orderTime))
     return html;
+
 }
 document.querySelectorAll('.js-buy-again-button').forEach((button) => {
     button.addEventListener('click', () => {
@@ -137,3 +139,4 @@ document.querySelectorAll('.js-buy-again-button').forEach((button) => {
     });
 })
 }
+console.log(orders)

@@ -71,6 +71,7 @@ export function calculateDeliveryDate(deliveryOption){
 
 export function calculateDeliveryTime (productItems){
     let deliveryDate = new Date(productItems.estimatedDeliveryTime)
+    let orderDate = new Date (productItems.orderTime)
     let weekDay = deliveryDate.getDay()
     console.log(weekDay)
     while (weekDay === 0 || weekDay === 6){
