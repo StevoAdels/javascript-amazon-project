@@ -1,5 +1,6 @@
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {isWeekend} from '../scripts/checkout/weekend.js';
+import {notWeekDay} from '../scripts/checkout/weekend.js';
 
 export const deliveryOptions = [
     {
@@ -69,17 +70,25 @@ export function calculateDeliveryDate(deliveryOption){
             return dateString;
 }
 
-export function calculateDeliveryTime (productItems){
-    let deliveryDate = new Date(productItems.estimatedDeliveryTime)
-    let orderDate = new Date (productItems.orderTime)
-    let weekDay = deliveryDate.getDay()
-    console.log(weekDay)
-    while (weekDay === 0 || weekDay === 6){
-        deliveryDate.setDate(deliveryDate.getDate() + 1);
-        weekDay = deliveryDate.getDay()
+export function calculateDeliveryTime (days, orderItems){
+   const  today = new Date(orderItems.orderTime)
+    
+
         
-    }
-    const dateString = deliveryDate.toLocaleDateString("en-US", {
+        let dayCount = days
+           
+   
+        while (dayCount > 0){
+           today.setDate(today.getDate() + 1)
+            const day = notWeekDay(today)
+           if (!day) { 
+                dayCount += -1
+         }
+
+        }
+        
+      
+    const dateString = today.toLocaleDateString("en-US", {
         month: "long",
         day: "numeric"
     })

@@ -3,7 +3,7 @@ import { calculateDeliveryTime } from "./deliveryOptions.js";
 import { products, loadProductsFetch } from "./products.js";
 import { formatCurrency } from "../scripts/utils/money.js";
 import { orders } from "./orderButton.js";
-import { renderOrderSummary } from "../scripts/checkout/orderSummary.js";
+import {displayDate} from '../scripts/checkout/weekend.js'
 
 
 
@@ -75,10 +75,11 @@ let matchingItem = '';
    let date = '';
     const product = orderItems.products
     let deliveryTime;
-    const orderTime = orderItems.orderTime
+    
 
     product.forEach((productItems) => {
-      deliveryTime = product.estimatedDeliveryTime
+     const days = displayDate(orderItems, productItems)
+      
        products.forEach((productsItems) => {
     if (productsItems.id ===productItems.productId ){
         matchingItem = productsItems
@@ -87,10 +88,7 @@ let matchingItem = '';
 // date needed to be included in code  
  
 
-    date = new Date(productItems.estimatedDeliveryTime).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric"
- })
+
          })
      html += `
   
@@ -103,7 +101,7 @@ let matchingItem = '';
                 ${matchingItem.name}
               </div>
               <div class="product-delivery-date">
-                Arriving on: ${calculateDeliveryTime(productItems)}
+                Arriving on: ${calculateDeliveryTime(days, orderItems)}
               </div>
               <div class="product-quantity">
                 Quantity: ${productItems.quantity}
@@ -127,7 +125,7 @@ let matchingItem = '';
             
  }) 
 
- console.log(Number(deliveryTime) - Number(orderTime))
+ 
     return html;
 
 }
@@ -139,4 +137,5 @@ document.querySelectorAll('.js-buy-again-button').forEach((button) => {
     });
 })
 }
+    
 console.log(orders)

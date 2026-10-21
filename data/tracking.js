@@ -1,7 +1,8 @@
 import { orders } from "./orderButton.js";
 import { loadProductsFetch, products } from "./products.js";
 import { cart } from "./cart-class.js";
-
+import { displayDate } from "../scripts/checkout/weekend.js";
+import {calculateDeliveryTime} from './deliveryOptions.js'
 
 loadTrackingPage();
 async function loadTrackingPage(){
@@ -27,6 +28,7 @@ function loadTrackingData(){
     const matchingProducts = products.find((product) => product.id === productId);
     const quantity = orderProduct.quantity;
 
+    const days = displayDate(orderItem, orderProduct);
 
 trackingHTML = `
    <a class="back-to-orders-link link-primary" href="orders.html">
@@ -34,7 +36,7 @@ trackingHTML = `
         </a>
 
         <div class="delivery-date">
-          Arriving on Monday, June 13
+          Arriving on ${calculateDeliveryTime(days, orderItem)}
         </div>
 
         <div class="product-info">

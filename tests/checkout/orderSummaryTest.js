@@ -10,9 +10,9 @@ describe('Test suite: renderOrderSummary', () => {
     const deliveryId = '3';
 
     beforeAll((done) => {
-            loadProductsFetch().then(() => {
-                done()
-            })
+        loadProductsFetch().then(() => {
+            done()
+        })
         });    
     beforeEach(() => {
                
@@ -24,7 +24,7 @@ describe('Test suite: renderOrderSummary', () => {
             
         `
         
-           cart.cartItems = [{
+        cart.cartItems = [{
         productId: productId1,
         quantity: 2,
         deliveryOptionId: '1'
@@ -33,6 +33,7 @@ describe('Test suite: renderOrderSummary', () => {
         quantity: 1,
         deliveryOptionId: '2'
     }]
+
 
        renderOrderSummary()
     });
@@ -86,7 +87,7 @@ describe('Test suite: renderOrderSummary', () => {
     it('disables place order when the cart is empty', () => {
         cart.cartItems = [];
 
-        renderOrderSummary();
+       
 
         expect(document.querySelector('.js-place-order').disabled).toBe(true);
     });
