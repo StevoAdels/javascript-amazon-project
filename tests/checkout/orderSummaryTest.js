@@ -87,7 +87,7 @@ describe('Test suite: renderOrderSummary', () => {
     it('disables place order when the cart is empty', () => {
         cart.cartItems = [];
 
-       
+       renderOrderSummary()
 
         expect(document.querySelector('.js-place-order').disabled).toBe(true);
     });

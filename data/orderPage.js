@@ -15,6 +15,7 @@ try{
 catch(error){
     console.log('error loading the page')
 }
+cart.updateCartQuantity();
 orderPage()
 
 }
@@ -22,6 +23,21 @@ orderPage()
 
 
 function orderPage(){
+  if (orders.length === 0){
+    const orderContainer = document.querySelector('.js-order-grid');
+    orderContainer.innerHTML = `
+    <div class="empty-cart-container js-empty-cart-container">
+          <div class="empty-cart-message">
+            <p>You have no orders.</p>
+            </div>
+            
+            <a href="checkout.html" class="button-primary">
+              Go ahead and place an order
+            </a>
+          </div>
+    `
+    return;
+  }
 let orderHTML = '';
 orders.forEach((orderItems) => {
 
@@ -79,7 +95,11 @@ let matchingItem = '';
 
     product.forEach((productItems) => {
      const days = displayDate(orderItems, productItems)
-      
+       const deliveredDate = calculateDeliveryTime(days, orderItems);
+    const dateString = deliveredDate.toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric"
+    })
        products.forEach((productsItems) => {
     if (productsItems.id ===productItems.productId ){
         matchingItem = productsItems
@@ -101,7 +121,7 @@ let matchingItem = '';
                 ${matchingItem.name}
               </div>
               <div class="product-delivery-date">
-                Arriving on: ${calculateDeliveryTime(days, orderItems)}
+                Arriving on: ${dateString}
               </div>
               <div class="product-quantity">
                 Quantity: ${productItems.quantity}
@@ -138,4 +158,4 @@ document.querySelectorAll('.js-buy-again-button').forEach((button) => {
 })
 }
     
-console.log(orders)
+

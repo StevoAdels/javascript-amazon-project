@@ -88,12 +88,9 @@ export function calculateDeliveryTime (days, orderItems){
         }
         
       
-    const dateString = today.toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric"
-    })
     
-    return dateString
+    
+    return today
 }
 
 

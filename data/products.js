@@ -74,7 +74,7 @@ instuctionsLink;
 }
 
 const date = new Date()
-console.log(date);
+
 
 
 /* const object2 = {
@@ -82,12 +82,7 @@ console.log(date);
   b: this.a
 } */
 
-  function logThis (){
-    console.log(this)
-  };
 
-  logThis();
-  logThis.call('hello');
 
 
 
@@ -104,7 +99,7 @@ export function loadProductsFetch(){
   } else if (productDetails.type === 'appliances'){
     return new Appliance (productDetails)
   }
-  console.log('load')
+ 
   
   return new Product (productDetails);
   
@@ -116,9 +111,7 @@ export function loadProductsFetch(){
   return promise;
 }
 
-loadProductsFetch().then(() => {
-   console.log('next step')
-})
+
 
 
 /*

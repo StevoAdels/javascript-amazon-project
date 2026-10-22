@@ -11,7 +11,11 @@ import { renderPaymentSummary } from './paymentSummary.js';
 
 export function renderOrderSummary(){
   const orderSummary = document.querySelector('.js-order-summary');
-displayEmptyCart()
+  if (cart.cartItems.length === 0){
+    displayEmptyCart()
+    return;
+  }
+
 cart.updateCheckoutItem();
 let cartSummaryHTML = ''; 
 
@@ -97,8 +101,6 @@ function displayEmptyCart (){
     
     renderPaymentSummary()
     cart.updateCheckoutItem();
-    renderOrderSummary()
-    
   }
 
 
